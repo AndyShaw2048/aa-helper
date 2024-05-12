@@ -10,7 +10,7 @@
                     向
                     <div class="payee-name">{{ item.payee_name }}</div>
                     转账
-                    <div class="payer-money">{{ roundToSpecial(item.pay_money) }} <span style="text-decoration: line-through;color: lightgray;">{{ item.pay_money }}</span></div>
+                    <div class="payer-money">{{ roundToSpecial(item.pay_money) }} <span style="text-decoration: line-through;color: lightgray;" v-if="roundToSpecial(item.pay_money) != item.pay_money">{{ item.pay_money }}</span></div>
                     元
                 </div>
             </div>
@@ -145,10 +145,6 @@ const roundToSpecial = (number) => {
         // 当小数大于0.66时，该数字进1
         return Math.ceil(number);
     }
-}
-
-const goBack = () => {
-    router.back()
 }
 
 onMounted(() => {

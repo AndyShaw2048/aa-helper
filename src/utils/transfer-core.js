@@ -69,13 +69,13 @@ export const simplifyTransfer = () => {
                     let money = majDetails[2][1];
                     transfers[payerId][payeeId] = Decimal(transfers[payerId][payeeId]).sub(Decimal(money)).toNumber()
                     transfers[payeeId][payerId] = -transfers[payerId][payeeId];
-                    majDetails[1][1] += money;
+                    majDetails[1][1] = Decimal(majDetails[1][1]).add(Decimal(money)).toNumber();
                     if (majDetails[1][1] != 0) {
                         payeeId = majDetails[3][0];
                         money = Math.abs(majDetails[1][1]);
                         transfers[payerId][payeeId] = Decimal(transfers[payerId][payeeId]).sub(Decimal(money)).toNumber()
                         transfers[payeeId][payerId] = -transfers[payerId][payeeId]
-                        majDetails[3][1] -= money;
+                        majDetails[3][1] = Decimal(majDetails[3][1]).sub(Decimal(money)).toNumber();
                     }
                     payerId = majDetails[0][0];
                     payeeId = majDetails[3][0];
@@ -89,7 +89,7 @@ export const simplifyTransfer = () => {
                     let money = Math.abs(majDetails[1][1]);
                     transfers[payerId][payeeId] = Decimal(transfers[payerId][payeeId]).sub(Decimal(money)).toNumber()
                     transfers[payeeId][payerId] = -transfers[payerId][payeeId];
-                    majDetails[2][1] -= money;
+                    majDetails[2][1] = Decimal(majDetails[2][1]).sub(Decimal(money)).toNumber();
 
                     payerId = majDetails[0][0];
                     payeeId = majDetails[2][0];
